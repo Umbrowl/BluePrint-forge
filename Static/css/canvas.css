@@ -1,0 +1,16 @@
+/* Regra específica para o painel central*/
+.center-panel {
+    background-color: var(--center-panel-bg-color);
+    color: var(--center-panel-text-color);
+    border-color: var(--center-panel-text-color);
+    border-style: solid;
+}
+
+/* Estilos de corpo e canvas*/
+canvas {
+    border-radius: 0.1rem; /* Bordas arredondadas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: block; /* Remove espaçamento extra */
+    width: 100%; /* Ocupa a largura total do contêiner */
+    height: 100%; /* Ocupa a altura total do contêiner */
+}
