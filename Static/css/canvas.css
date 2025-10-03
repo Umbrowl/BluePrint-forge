@@ -1,0 +1,99 @@
+/* Regra específica para o painel central*/
+.center-panel {
+    flex: 1;
+    margin: 20px;
+    padding: 20px;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 40px);
+    background-color: var(--center-panel-bg-color);
+    color: var(--center-panel-text-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Quando ambas as sidebars estão fechadas */
+.center-panel {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: calc(100% - 40px);
+}
+
+/* Quando apenas a sidebar esquerda está aberta */
+.dropdown-sidebar.expanded ~ .center-panel {
+    margin-left: 280px; /* mesma largura da sidebar */
+    width: calc(100% - 300px); /* 280px sidebar + 20px margin */
+}
+
+/* Quando apenas a sidebar direita está aberta */
+.dropdown-right-sidebar.expanded ~ .center-panel {
+    margin-right: 280px; /* mesma largura da sidebar */
+    width: calc(100% - 300px); /* 280px sidebar + 20px margin */
+}
+
+/* Quando ambas as sidebars estão abertas */
+.dropdown-sidebar.expanded ~ .dropdown-right-sidebar.expanded ~ .center-panel,
+.dropdown-right-sidebar.expanded ~ .dropdown-sidebar.expanded ~ .center-panel {
+    margin-left: 280px; /* sidebar esquerda */
+    margin-right: 280px; /* sidebar direita */
+    width: calc(100% - 600px); /* 560px sidebars + 40px margins */
+}
+
+/* Container do Canvas responsivo */
+.canvas-container {
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    background-color: var(--canvas-bg-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+#BPForgeCanvas, #canvas3d, canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: var(--canvas-bg-color);
+}
+
+/* Controles superiores */
+.controls-top {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 10;
+}
+
+.control-group {
+    display: flex;
+    gap: 10px;
+}
+
+#title-project input[type="number"],
+#title-project  input[type="text"],
+#title-project input[type="range"] {
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.375rem; 
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--top-panel-bg-color);
+    color: var(--top-panel-text-color);
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    opacity: 0.75;
+}
+
+/* garante que os labels dentro de #propertiesPanel usem a cor do texto do painel */
+#title-project  label {
+    color: var(--top-panel-text-color);
+    opacity: 0.5;
+}

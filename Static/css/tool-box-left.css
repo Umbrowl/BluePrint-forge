@@ -1,0 +1,253 @@
+/* Estilos para a toolbox lateral */
+.dropdown-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 70px;
+    background: #2c3e50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    transition: width 0.4s ease;
+    z-index: 1000;
+    overflow-x: hidden;
+}
+
+.dropdown-sidebar.expanded {
+    width: 280px;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    color: #ecf0f1;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    transition: all 0.3s;
+    margin-bottom: 30px;
+}
+
+.toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.tools-container {
+    width: 100%;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, height 0.4s ease;
+}
+
+.dropdown-sidebar.expanded .tools-container {
+    opacity: 1;
+    height: auto;
+    overflow: visible;
+}
+
+.tool-section {
+    margin-bottom: 25px;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.tool-section h3 {
+    color: #3498db;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #34495e;
+}
+
+/* Garantir que o conteúdo principal não fique atrás da sidebar */
+.content-area {
+    margin-left: 70px;
+    transition: margin-left 0.4s ease;
+}
+
+.dropdown-sidebar.expanded ~ .content-area {
+    margin-left: 280px;
+}
+
+/* Adicione ao seu CSS existente */
+.toolbox-toggle-btn {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    width: 24px;
+    height: 60px;
+    background-color: var(--right-panel-bg-color);
+    color: var(--right-panel-text-color);
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.toolbox-toggle-btn:hover {
+    background-color: var(--dropdown-hover-bg);
+    width: 28px;
+}
+
+.toolbox-toggle-btn.active {
+    left: 280px; /* mesma largura do toolbox expandido */
+}
+
+.toolbox-toggle-btn.active i {
+    transform: rotate(180deg);
+}
+
+/* Ajuste o dropdown-sidebar para iniciar oculto */
+.dropdown-sidebar {
+    position: fixed;
+    left: -280px; /* Inicia oculto */
+    top: 0;
+    height: 100vh;
+    width: 280px;
+    background: var(--top-panel-bg-color);
+    color: var(--right-panel-text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    transition: left 0.4s ease;
+    z-index: 1000;
+    overflow-x: hidden;
+}
+
+.dropdown-sidebar.expanded {
+    left: 0; /* Aparece quando expandido */
+}
+
+/* Ajuste o conteúdo principal para se adaptar */
+.content-area {
+    margin-left: 0;
+    transition: margin-left 0.4s ease;
+}
+
+.dropdown-sidebar.expanded ~ .content-area {
+    margin-left: 280px;
+}
+
+/* Adicione ao seu CSS existente */
+.toolbox-toggle-btn {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001; /* Maior que o toolbox para ficar acima */
+    width: 24px;
+    height: 60px;
+    background-color: var(--right-panel-bg-color);
+    color: var(--right-panel-text-color);
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.toolbox-toggle-btn:hover {
+    background-color: var(--dropdown-hover-bg);
+    width: 28px;
+}
+
+.toolbox-toggle-btn.active {
+    left: 280px; /* mesma largura do toolbox expandido */
+}
+
+.toolbox-toggle-btn.active i {
+    transform: rotate(180deg);
+}
+
+/* Ajuste o dropdown-sidebar para iniciar oculto */
+.dropdown-sidebar {
+    position: fixed;
+    left: -280px; /* Inicia oculto */
+    top: 0;
+    height: 100vh;
+    width: 280px;
+    background: var(--right-panel-bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    transition: left 0.4s ease;
+    z-index: 1000;
+    overflow-x: hidden;
+}
+
+.dropdown-sidebar.expanded {
+    left: 0; /* Aparece quando expandido */
+}
+
+/* Ajuste o conteúdo principal para se adaptar */
+.content-area {
+    margin-left: 0;
+    transition: margin-left 0.4s ease;
+}
+
+.dropdown-sidebar.expanded ~ .content-area {
+    margin-left: 280px;
+}
+/* Estilos para o toggle de senha */
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6b7280;
+    background: none;
+    border: none;
+    z-index: 10;
+
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+        
+.password-container {
+    position: relative;
+}
+        
+.password-container input {
+    padding-right: 40px;
+}
+
+/* Estilos para o toggle de pesquisa */
+.search-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6b7280;
+    background: none;
+    border: none;
+    z-index: 10;
+
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+        
+.search-container {
+    position: relative;
+}
+        
+.search-container input {
+    padding-right: 40px;
+}

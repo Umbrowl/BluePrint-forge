@@ -1,0 +1,42 @@
+.right-div {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  row-gap: 0.5rem;
+}
+
+.grid-right{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Regra específica para o painel lateral direito */
+.right-panel {
+    background-color: var(--right-panel-bg-color);
+    color: var(--right-panel-text-color);
+    
+    width: 20%;
+    padding: 1rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Estilo para o grid dentro do terreno */
+.grid-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1rem;
+}
+
+.grid-right label {
+    grid-column: 1;
+}
+
+.grid-right input {
+    grid-column: 2;
+}
+
+.grid-right .col-span-2 {
+    grid-column: 1 / span 2;
+}
