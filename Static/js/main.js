@@ -144,10 +144,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const scaleBtn = document.getElementById('scaleBtn');
     const scaleDropdown = document.getElementById('scaleDropdown');
     const currentScale = document.getElementById('currentScale');
-    const scaleOptions = document.querySelectorAll('.scale-option'); // ADICIONE ESTA LINHA
+    const scaleOptions = document.querySelectorAll('.scale-option');
     
     // Variáveis de estado globais para a aplicação principal
-    // ✅ currentPalette já foi inicializada acima
     let gridSize = 50;
     let currentMode = 'fantasy';
     let currentView = '2d';
@@ -163,10 +162,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     let windowStartX = 0;
     let windowStartY = 0;
     let tempWindow = null;
-
-    // --- ---
-
-
     // --- ---
     
     if (tools && typeof tools.initTools === 'function') {
@@ -177,7 +172,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     //Inicialização do controle de escala
     if (scaleBtn && scaleDropdown && scaleOptions) {
-        let currentScaleValue = '1:50'; // Mude para 1:50 como padrão
+        let currentScaleValue = '1:50'; 
         
         // Função para atualizar a escala
         function updateScale(scale) {
@@ -285,11 +280,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Função para salvar a planta
         async function savePlant() {
             try {
-                console.log('🔄 Iniciando salvamento da planta...');
+                console.log('Iniciando salvamento da planta...');
                 
                 // Obtem o nome do projeto
                 const projectName = document.getElementById('nameProject').value || 'Projeto sem nome';
-                console.log('📝 Nome do projeto:', projectName);
+                console.log('Nome do projeto:', projectName);
                 
                 // Prepara dados da planta para salvar
                 const plantData = {
@@ -304,7 +299,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     lastSaved: new Date().toISOString()
                 };
                 
-                console.log('📊 Dados da planta preparados:', plantData);
+                console.log('Dados da planta preparados:', plantData);
                 
                 // Preencher o formulário escondido
                 document.getElementById('formPlantData').value = JSON.stringify(plantData);
@@ -312,8 +307,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 
                 // Obter o formulário
                 const form = document.getElementById('savePlantForm');
-                console.log('📋 Formulário:', form);
-                console.log('🎯 Action do formulário:', form.action);
+                console.log('Formulário:', form);
+                console.log('Action do formulário:', form.action);
                 
                 // Mostrar loading
                 showGlobalLoadingIndicator();
@@ -321,22 +316,22 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // Usar Fetch API para enviar o formulário
                 const formData = new FormData(form);
                 
-                console.log('📤 Enviando dados para:', form.action);
+                console.log('Enviando dados para:', form.action);
                 
                 const response = await fetch(form.action, {
                     method: 'POST',
                     body: formData
                 });
                 
-                console.log('📥 Resposta recebida. Status:', response.status);
-                console.log('📥 Headers:', response.headers);
+                console.log('Resposta recebida. Status:', response.status);
+                console.log('Headers:', response.headers);
                 
                 // Verificar se a resposta é JSON
                 const contentType = response.headers.get('content-type');
                 if (!contentType || !contentType.includes('application/json')) {
                     const text = await response.text();
                     console.error('❌ Resposta não é JSON:', text.substring(0, 200));
-                    throw new Error('Servidor retornou HTML em vez de JSON. Verifique se o arquivo PHP existe.');
+                    throw new Error('Servidor retornou HTML em vez de JSON.');
                 }
                 
                 const result = await response.json();
@@ -508,7 +503,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     //funções auxiliares para feedback visual:
     function showLoadingIndicator() {
-        // Criar ou mostrar um indicador de carregamento
         let loader = document.getElementById('loadingIndicator');
         if (!loader) {
             loader = document.createElement('div');
@@ -631,13 +625,13 @@ Modals.setupPreferencesModal(
     Themes.themeManager.currentTheme, 
     (newTheme) => {
         // Callback quando o usuário confirma (clica em OK) - SALVA PERMANENTEMENTE
-        console.log('💾 Salvando tema permanentemente no banco:', newTheme);
+        console.log('Salvando tema permanentemente no banco:', newTheme);
         Themes.themeManager.selectTheme(newTheme); // Este SALVA no banco
     }, 
     (previewTheme) => {
         // Callback para pré-visualização (apenas muda a classe CSS temporariamente)
-        console.log('👀 Apenas pré-visualizando tema:', previewTheme);
-        Themes.themeManager.previewTheme(previewTheme); // Este apenas APLICA visualmente
+        console.log('Apenas pré-visualizando tema:', previewTheme);
+        Themes.themeManager.previewTheme(previewTheme);
     }, 
     Themes.themeManager.updateThemeSelection.bind(Themes.themeManager)
 );
@@ -844,7 +838,7 @@ Modals.setupPreferencesModal(
         // --- 4.2. Inicialização do Estado Inicial para ---
 
         // Define o estado inicial dos botões de alternância
-        if (currentMode === 'fantasy' && modeFantasyBtn) { //ConfigurarmodeFantasy e modeRealistic no final
+        if (currentMode === 'fantasy' && modeFantasyBtn) {
             updateToggleButtons(modeFantasyBtn, [modeFantasyBtn, modeRealisticBtn]);
         } else if (modeRealisticBtn) { 
             updateToggleButtons(modeRealisticBtn, [modeFantasyBtn, modeRealisticBtn]);
@@ -922,7 +916,7 @@ async function loadUserPlants() {
         
         if (result.success) {
             console.log('Plantas do usuário:', result.plantas);
-            updatePlantsDropdown(result.plantas); // Atualizar dropdown
+            updatePlantsDropdown(result.plantas);
             return result.plantas;
         } else {
             console.error('Erro ao carregar plantas:', result.error);
@@ -1076,7 +1070,7 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function updateRoomListAndRedraw() {
         if (typeof tools.updateElementsList === 'function') {
-            tools.updateElementsList(); // Chamar a função do tools.js
+            tools.updateElementsList(); // Chama a função do tools.js
         }
         
         console.log('Atualizando lista de cômodos e redesenhando canvas');
@@ -1113,7 +1107,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', resizeCanvas);
     }
 
-    // Inicializar a toolbox apenas se estivermos na página do editor
+    // Inicializa a toolbox apenas se estivermos na página do editor
     const isEditorPage = document.getElementById('canvas2d') || 
                          document.getElementById('design-canvas') ||
                          document.getElementById('dropdownSidebar') ||
@@ -1132,7 +1126,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Inicializar modo de arrastar e soltar para cômodos se estivermos na página com canvas
+    // Inicializa modo de arrastar e soltar para cômodos se estivermos na página com canvas
     if (BPForgeCanvas && ctx) {
         initializeDragAndDrop();
     }
@@ -1163,7 +1157,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     dragStartX = mouseX - room.x;
                     dragStartY = mouseY - room.y;
                     
-                    // Atualizar propriedades do item selecionado
+                    // Atualiza propriedades do item selecionado
                     updateSelectedItemProperties(room);
                     
                     redrawCanvas();
@@ -1178,7 +1172,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const mouseX = (e.clientX - rect.left) / Zoom.getCurrentZoom() - Zoom.getPanX();
                 const mouseY = (e.clientY - rect.top) / Zoom.getCurrentZoom() - Zoom.getPanY();
                 
-                // Atualizar posição do cômodo
+                // Atualiza posição do cômodo
                 selectedRoom.x = mouseX - dragStartX;
                 selectedRoom.y = mouseY - dragStartY;
                 
@@ -1209,17 +1203,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateSelectedItemProperties(room) {
         if (!propertiesPanelElements.selectedItemProperties || !room) return;
         
-        // Esconder texto "Nenhum item selecionado"
+        // Esconde texto "Nenhum item selecionado"
         if (propertiesPanelElements.noItemSelectedText) {
             propertiesPanelElements.noItemSelectedText.style.display = 'none';
         }
         
-        // Mostrar inputs de propriedades
+        // Mostra inputs de propriedades
         if (propertiesPanelElements.roomPropertiesInputs) {
             propertiesPanelElements.roomPropertiesInputs.style.display = 'block';
         }
         
-        // Preencher valores
+        // Preenche valores
         if (propertiesPanelElements.selectedItemName) {
             propertiesPanelElements.selectedItemName.textContent = room.name;
         }
@@ -1248,7 +1242,7 @@ document.addEventListener('DOMContentLoaded', function() {
             propertiesPanelElements.itemHidden.checked = room.hidden || false;
         }
         
-        // Adicionar event listeners para os inputs
+        // Adiciona event listeners para os inputs
         addPropertyChangeListeners(room);
     }
 
@@ -1256,10 +1250,10 @@ document.addEventListener('DOMContentLoaded', function() {
      * Adiciona listeners para mudanças nas propriedades
      */
     function addPropertyChangeListeners(room) {
-        // Remover listeners anteriores para evitar duplicação
+        // Remove listeners anteriores para evitar duplicação
         removePropertyChangeListeners();
         
-        // Adicionar novos listeners
+        // Adiciona novos listeners
         if (propertiesPanelElements.itemWidth) {
             propertiesPanelElements.itemWidth.addEventListener('change', (e) => {
                 room.width = parseFloat(e.target.value) * Utils.PIXELS_PER_METER;
@@ -1336,7 +1330,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const newInput = input.cloneNode(true);
                 input.parentNode.replaceChild(newInput, input);
                 
-                // Atualizar a referência no objeto
+                // Atualiza a referência no objeto
                 const propName = Object.keys(propertiesPanelElements).find(
                     key => propertiesPanelElements[key] === input
                 );
@@ -1347,7 +1341,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Adicionar listener para o botão de adicionar cômodo
+    // Adiciona listener para o botão de adicionar cômodo
     const addRoomBtnCanvas = document.getElementById('addRoomBtn');
     if (addRoomBtnCanvas) {
         addRoomBtnCanvas.addEventListener('click', () => {
@@ -1364,17 +1358,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 borderWidth: 2
             };
             
-            // ✅ CORRIGIDO: Usar função do módulo Rooms
             const createdRoom = Rooms.createRoom(newRoom);
             selectedRoomId = createdRoom.id;
             
-            // ✅ CORRIGIDO: Encontrar no array correto
             updateSelectedItemProperties(createdRoom);
             updateRoomListAndRedraw();
         });
     }
 
-    // Adicionar listener para o botão de reorganizar
+    // Adiciona listener para o botão de reorganizar
     if (reorganizeBtn) {
         reorganizeBtn.addEventListener('click', () => {
             Rooms.organizeRooms();
@@ -1382,7 +1374,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Adicionar listener para o botão de ligar cômodos
+    // Adiciona listener para o botão de ligar cômodos
     if (linkRoomsBtn) {
         linkRoomsBtn.addEventListener('click', () => {
             // Implementar lógica de ligação de cômodos
@@ -1390,7 +1382,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Adicionar suporte a teclado
+    // Adiciona suporte a teclado
     document.addEventListener('keydown', (e) => {
         if (selectedRoomId) {
             const room = Rooms.getRoomById(selectedRoomId);
@@ -1416,7 +1408,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     e.preventDefault();
                     break;
                 case 'Delete':
-                    deleteElement('room', selectedRoomId); // Usar a função importada
+                    deleteElement('room', selectedRoomId);
                     selectedRoomId = null;
                     if (propertiesPanelElements.noItemSelectedText) {
                         propertiesPanelElements.noItemSelectedText.style.display = 'block';
@@ -1516,7 +1508,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const newWall = {
             id: tools.generateUniqueId(),
-            name: `Parede ${tools.canvasElements.walls.length + 1}`, // ADICIONAR NOME
+            name: `Parede ${tools.canvasElements.walls.length + 1}`,
             startX: tempWall.startX,
             startY: tempWall.startY,
             endX: tempWall.endX,
@@ -1528,7 +1520,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         tools.addWall(newWall);
-        updateRoomListAndRedraw(); // Garantir que esta função é chamada
+        updateRoomListAndRedraw(); // Garante que esta função é chamada
     }
 
     // Função para desenhar a parede temporária
@@ -1616,10 +1608,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         tools.addWindow(newWindow);
         
-        // SALVAR NO BANCO
+        //salva no banco
         salvarElementoNoBanco(newWindow, 'janela');
         
-        // Resetar variáveis
+        // Reseta variáveis
         tempWindow = null;
         windowDrawingMode = false;
         updateRoomListAndRedraw();
@@ -1652,7 +1644,7 @@ document.addEventListener('DOMContentLoaded', function() {
         addWindowBtn.addEventListener('click', () => {
             windowDrawingMode = !windowDrawingMode;
             
-            // Desativar outros modos de desenho
+            // Desativa outros modos de desenho
             wallDrawingMode = false;
             
             // Feedback visual para o usuário
@@ -1660,7 +1652,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 addWindowBtn.classList.add('active');
                 if (BPForgeCanvas) BPForgeCanvas.style.cursor = 'crosshair';
                 
-                // Remover classe active de outros botões
+                // Remove classe active de outros botões
                 if (addWallBtn) addWallBtn.classList.remove('active');
             } else {
                 addWindowBtn.classList.remove('active');
@@ -1723,7 +1715,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function finishWindowDrawing() {
         if (!windowDrawingMode || !tempWindow) return;
         
-        // Calcular comprimento da janela
+        // Calcula comprimento da janela
         let length = 0;
         if (tempWindow.orientation === 'horizontal') {
             length = Math.abs(tempWindow.endX - tempWindow.startX);
@@ -1731,7 +1723,7 @@ document.addEventListener('DOMContentLoaded', function() {
             length = Math.abs(tempWindow.endY - tempWindow.startY);
         }
         
-        // Garantir que a janela tenha pelo menos 2 quadrados de comprimento
+        // Garante que a janela tenha pelo menos 2 quadrados de comprimento
         const minLength = gridSize * 2;
         if (length < minLength) {
             // Ajustar para o tamanho mínimo
@@ -1744,14 +1736,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         tools.addWindow(newWindow);
         
-        // Resetar variáveis temporárias
+        // Reseta variáveis temporárias
         tempWindow = null;
         windowDrawingMode = false;
         
-        // Atualizar a interface
+        // Atualiza a interface
         updateRoomListAndRedraw();
         
-        // Remover feedback visual
+        // Remove feedback visual
         if (addWindowBtn) addWindowBtn.classList.remove('active');
 
         if (BPForgeCanvas && BPForgeCanvas.style) {
@@ -1881,7 +1873,7 @@ if (addWindowBtn) {
     addWindowBtn.addEventListener('click', () => {
         windowDrawingMode = !windowDrawingMode;
         
-        // Desativar outros modos de desenho
+        // Desativa outros modos de desenho
         wallDrawingMode = false;
         
         // Feedback visual para o usuário
@@ -1889,7 +1881,7 @@ if (addWindowBtn) {
             addWindowBtn.classList.add('active');
             BPForgeCanvas.style.cursor = 'crosshair';
             
-            // Remover classe active de outros botões
+            // Remove classe active de outros botões
             if (addWallBtn) addWallBtn.classList.remove('active');
         } else {
             addWindowBtn.classList.remove('active');
@@ -1907,7 +1899,7 @@ if (addWindowBtn) {
             });
         }
 
-        // Inicializar canvas 3D
+        // Inicializa canvas 3D
         const canvas3dElement = document.getElementById('canvas3d');
         if (canvas3dElement) {
             this.initThreeJS();
@@ -1950,7 +1942,7 @@ if (addWindowBtn) {
         // Mostrar view inicial
         this.setViewMode('2d');
         
-        // Gerar um layout inicial para teste
+        // Gera um layout inicial para teste
         this.generateLocalLayout();
     }
 
@@ -2078,7 +2070,7 @@ if (addWindowBtn) {
     setViewMode(mode) {
         this.viewMode = mode;
         
-        // Atualizar botões
+        // Atualiza botões
         document.getElementById('view2dBtn').classList.toggle('active', mode === '2d');
         document.getElementById('view3dBtn').classList.toggle('active', mode === '3d');
         
@@ -2086,7 +2078,7 @@ if (addWindowBtn) {
         document.getElementById('canvas2d').style.display = mode === '2d' ? 'block' : 'none';
         document.getElementById('canvas3d').style.display = mode === '3d' ? 'block' : 'none';
         
-        // Renderizar layout atual se existir
+        // Renderiza layout atual se existir
         if (this.currentLayout) {
             if (mode === '2d') {
                 this.render2D();
@@ -2104,7 +2096,7 @@ if (addWindowBtn) {
 
         
 
-        // Adicionar grid de fundo
+        // Adiciona grid de fundo
         const gridSize = 50;
         for (let i = 0; i <= 16; i++) {
             // Linhas horizontais
@@ -2127,7 +2119,7 @@ if (addWindowBtn) {
             this.canvas2d.add(lineV);
         }
 
-        // Renderizar objetos
+        // Renderiza objetos
         this.currentLayout.forEach((item, index) => {
             const scale = 600; // Escala para visualização
             const rect = new fabric.Rect({
@@ -2285,11 +2277,11 @@ if (addRoomBtnCanvas) {
             borderWidth: 2
         };
         
-        // Usar a função addRoom importada
+        // Usa a função addRoom importada
         const roomId = addRoom(newRoom);
         selectedRoomId = roomId;
         
-        // Encontrar o room recém-criado para atualizar propriedades
+        // Encontra o room recém-criado para atualizar propriedades
         const createdRoom = canvasElements.rooms.find(room => room.id === roomId);
         if (createdRoom) {
             updateSelectedItemProperties(createdRoom);
@@ -2461,7 +2453,7 @@ function drawTempWall() {
     
     ctx.restore();
 }
-// Inicializar a toolbox apenas se estivermos na página do editor
+// Inicializa a toolbox apenas se estivermos na página do editor
 const isEditorPage = document.getElementById('canvas2d') || 
                      document.getElementById('design-canvas') ||
                      document.getElementById('dropdownSidebar');
@@ -2481,12 +2473,12 @@ function clearLocalStorage() {
     localStorage.removeItem('bpforge_layout');
     console.log('Dados locais limpos!');
 }
-    // Chamar quando quiser limpar
+    // Chama quando quiser limpar
     clearLocalStorage();
 
 async function salvarElementoNoBanco(elemento, tipo) {
     try {
-        // Converter tipo para formato do banco
+        // Converte tipo para formato do banco
         const tipoBanco = {
             'room': 'comodo',
             'wall': 'parede',
@@ -2529,7 +2521,7 @@ async function salvarElementoNoBanco(elemento, tipo) {
     }
 }
 
-// Modificar as funções de finalização para salvar no banco
+// Modifica as funções de finalização para salvar no banco
 function finishWallDrawing() {
     if (!wallDrawingMode || !tempWall) return;
     
@@ -2548,10 +2540,10 @@ function finishWallDrawing() {
     
     tools.addWall(newWall);
     
-    // SALVAR NO BANCO
+    //salva no banco
     salvarElementoNoBanco(newWall, 'parede');
     
-    // Resetar variáveis
+    // Reseta variáveis
     tempWall = null;
     wallDrawingMode = false;
     updateRoomListAndRedraw();
@@ -2559,3 +2551,4 @@ function finishWallDrawing() {
 
 
 // window.obterPlantaIdAtual = obterPlantaIdAtual;
+
